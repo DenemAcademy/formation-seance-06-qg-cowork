@@ -297,6 +297,9 @@ document.querySelectorAll('.reveal').forEach(e=>io.observe(e));
 document.querySelectorAll('.prompt-panel').forEach(panel=>{const b=panel.querySelector('.copy'),c=panel.querySelector('code');if(!b||!c)return;b.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(c.innerText);b.textContent='Copié';b.classList.add('copied');setTimeout(()=>{b.textContent='Copier';b.classList.remove('copied')},1200)}catch(e){b.textContent='Sélectionne'}})});
 </script>
 
+
+
+
 <!-- DENEM visual system normalization -->
 <style id="denem-visual-system">
 :root {
@@ -340,6 +343,11 @@ header::before {
 main > section {
   background: var(--denem-paper) !important;
   background-image: none !important;
+}
+.reveal,
+.reveal.visible {
+  opacity: 1 !important;
+  transform: none !important;
 }
 .topbar,
 .top,
@@ -552,6 +560,8 @@ tbody tr:nth-child(even) td,
       return `<a href="#section-${label}">${label}</a>`;
     }).join('');
   }
+
+  document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
 
   document.querySelectorAll('.stat, .hero-stats .stat, .stats .stat, .summary-card, .act').forEach(el => {
     if (/sections?\s+(guidées|guides|section)|sections?\s*\d+|\d+\s*sections?/i.test(el.textContent || '')) {
